@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
+const Counter = ({count, setCount}) => {
+  
+  function handelMaines() {
+    if (count < 1) {
+      setCount(0);
+    } else {
+      setCount(count - 1);
+    }
+  }
 
-const Counter = () => {
-    const [count, setCount] = useState(0);
-    return (
-        <div className='counterSection'>
-            <button className='PluseBottom' onClick={() => setCount(count + 1)}>+</button>
-            <div> {count}</div>
-            <button className='PluseBottom' onClick={() => setCount(count - 1)}>-</button>
-        </div>
-    );
+  return (
+    <div className="counterSection">
+      <button className="PluseBottom" onClick={() => setCount(count + 1)}>
+        +
+      </button>
+      <div className="CounterShow"> {count}</div>
+      <button className="PluseBottom" onClick={handelMaines}>
+        -
+      </button>
+    </div>
+  );
 };
 export default Counter;

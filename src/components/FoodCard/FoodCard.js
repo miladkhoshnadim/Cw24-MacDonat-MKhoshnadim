@@ -1,18 +1,20 @@
 import Counter from "../Counter/counter";
 import hamber from "../../assets/img/hamburger.png";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FactorInfoContext } from "../UseContext";
 
-const FoodCard = ({ item, setTotPrice, totPrice }) => {
+const FoodCard = ({ item }) => {
+  const inFormationFactor = useContext(FactorInfoContext);
   const [count, setCount] = useState(0);
   const TotalSinglePrice = count * item.price;
-  let ArrayObject = totPrice;
+  let ArrayObject = inFormationFactor.totPrice;
 
   useEffect(() => {
     const index = ArrayObject.findIndex((old) => old.price === item.price);
     // console.log("index", index);
-    if (index>-1) {
+    if (index > -1 && count > 0) {
       ArrayObject[index].Counter = count;
-    } else {
+    } else if (count > 0) {
       ArrayObject.push({
         price: item.price,
         Counter: count,
@@ -21,14 +23,14 @@ const FoodCard = ({ item, setTotPrice, totPrice }) => {
     }
 
     // console.log("newArray", ArrayObject);
-    setTotPrice(ArrayObject);
-  }, [count]);
+    inFormationFactor.setTotPrice(ArrayObject);
+  }, [ArrayObject,count,inFormationFactor,item.name,item.price]);
 
   return (
     <div className="SingleProduct">
       <div>
         {" "}
-        <img className="imageProduct" src={hamber} />
+        <img alt="" className="imageProduct" src={hamber} />
       </div>
       <div className="ExplainNamePriceDiv">
         <span className="HeadSingleCard">{item.name}</span>

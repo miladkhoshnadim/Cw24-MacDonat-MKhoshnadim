@@ -40,13 +40,13 @@ const pruducts = [
   },
 ];
 
-export const ProductSection = ({ setTotPrice, totPrice }) => {
+export const ProductSection = () => {
   return (
     <div className="ManProductSection">
       <Headers />
       <div className="SingleProductSection">
         {pruducts.map((item) => (
-          <FoodCard item={item} setTotPrice={setTotPrice} totPrice={totPrice} />
+          <FoodCard key={item.id} item={item} />
         ))}
       </div>
     </div>
